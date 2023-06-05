@@ -32,7 +32,7 @@ function App() {
       <h1 className="header">Todo List</h1>
       <ul className="list">
         {newtask.map(task => {
-          return <Task key={task.id} task={task}/>
+          return <Task key={task.id} task={task} setNewTask={setNewTask}/>
         })}
       </ul>
     </>
