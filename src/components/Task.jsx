@@ -1,8 +1,8 @@
 import React from "react";
 
-const Task = ({ task, setNewTask }) => {
+const Task = ({ task, setnewTask }) => {
   const toggleTodo = (id, completed) => {
-    setNewTask(currentTasks => {
+    setnewTask(currentTasks => {
       return currentTasks.map(task => {
         if (task.id === id) {
           return { ...task, completed }
@@ -10,6 +10,12 @@ const Task = ({ task, setNewTask }) => {
 
         return task;
       })
+    })
+  }
+
+  const removeTask = (id) => {
+    setnewTask((currentTasks) => {
+      return currentTasks.filter(task => task.id !== id);
     })
   }
 
@@ -21,7 +27,8 @@ const Task = ({ task, setNewTask }) => {
         />
         {task.title}
       </label>
-      <button className="btn btn-danger">Remove</button>
+      <button
+      onClick={() => removeTask(task.id)} className="btn btn-danger">Remove</button>
     </li>
   );
 };

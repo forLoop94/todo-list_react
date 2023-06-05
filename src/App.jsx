@@ -4,11 +4,11 @@ import Task from "./components/Task";
 
 function App() {
   const [newItem, setNewItem] = useState("");
-  const [newtask, setNewTask] = useState([]);
+  const [newTask, setnewTask] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNewTask((currentTasks) => {
+    setnewTask((currentTasks) => {
       return [...currentTasks, { id: crypto.randomUUID(), title: newItem, completed: false }
       ]
     });
@@ -31,8 +31,10 @@ function App() {
       </form>
       <h1 className="header">Todo List</h1>
       <ul className="list">
-        {newtask.map(task => {
-          return <Task key={task.id} task={task} setNewTask={setNewTask}/>
+        {/* short-circuiting */}
+        { newTask.length === 0 && "No tasks yet!"}
+        {newTask.map(task => {
+          return <Task key={task.id} task={task} setnewTask={setnewTask} />
         })}
       </ul>
     </>

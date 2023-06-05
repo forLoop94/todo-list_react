@@ -4,7 +4,7 @@
 }
 
 body {
-  background: #333;
+  background: linear-gradient(90deg, #333, rgb(9, 53, 122));
   color: hsl(200, 100%, 90%);
   max-width: 400px;
   padding: 1rem;
