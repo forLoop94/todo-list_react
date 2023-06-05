@@ -1,33 +1,39 @@
 import { useState } from "react";
 import "./styles.css";
+import Task from "./components/Task";
 
 function App() {
-  const [newItem, setNewItem] = useState("item 1");
+  const [newItem, setNewItem] = useState("");
+  const [newtask, setNewTask] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setNewTask((currentTasks) => {
+      return [...currentTasks, { id: crypto.randomUUID(), title: newItem, completed: false }
+      ]
+    });
+
+    setNewItem("");
+  }
+
   return (
     <>
-      <form className="new-item-form">
+      <form onSubmit={handleSubmit} className="new-item-form">
         <div className="form-row">
           <label htmlFor="item">New task</label>
-          <input value={newItem} type="text" id="item" placeholder="Enter new task" />
+          <input value={newItem}
+          type="text"
+          id="item"
+          onChange={(e) => setNewItem(e.target.value)}
+          placeholder="Enter new task" />
         </div>
         <button className="btn">Add</button>
       </form>
       <h1 className="header">Todo List</h1>
       <ul className="list">
-        <li>
-          <label>
-            <input type="checkbox" />
-            Item 1
-          </label>
-          <button className="btn btn-danger">Remove</button>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" />
-            Item 2
-          </label>
-          <button className="btn btn-danger">Remove</button>
-        </li>
+        {newtask.map(task => {
+          return <Task key={task.id} task={task}/>
+        })}
       </ul>
     </>
   );
