@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles.css";
 import Task from "./components/Task";
 
 function App() {
   const [newItem, setNewItem] = useState("");
-  const [newTask, setnewTask] = useState([]);
+  const [newTask, setnewTask] = useState(() => {
+    const storedTasks = localStorage.getItem('TASKS');
+    if (storedTasks == null) return [];
+
+    return JSON.parse(storedTasks);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("TASKS", JSON.stringify(newTask));
+  }, [newTask])
 
   const handleSubmit = (e) => {
     e.preventDefault();
