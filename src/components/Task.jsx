@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from 'prop-types';
 
 const Task = ({ task, setnewTask }) => {
   const toggleTodo = (id, completed) => {
@@ -31,6 +31,11 @@ const Task = ({ task, setnewTask }) => {
       onClick={() => removeTask(task.id)} className="btn btn-danger">Remove</button>
     </li>
   );
+};
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  setnewTask: PropTypes.func.isRequired,
 };
 
 export default Task;
